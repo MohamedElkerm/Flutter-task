@@ -34,8 +34,8 @@ class SearchScreen extends StatelessWidget {
               child: Column(
                 children: [
                   MyTextFormField(
-                    hintText: "hintText",
-                    label: "search",
+                    hintText: AppStrings.hintTextForSearchField,
+                    label: AppStrings.titleForSearchField,
                     textEditingController:
                         searchCubit.searchTextEditingController,
                     textInputType: TextInputType.text,
@@ -43,27 +43,30 @@ class SearchScreen extends StatelessWidget {
                   const SizedBox(
                     height: 8,
                   ),
-                  MyButton(
-                    textStyle: getSemiBold(
-                      fontColor: AppColors.myWhite,
-                      fontSize: 16,
-                    ),
-                    btnName: "btnName",
-                    function: () {
-                      searchCubit.getWeatherCityByCityName();
-                    },
-                  ),
+                  searchCubit.searchButtonIsLoading
+                      ? const MyButtonLoading()
+                      : MyButton(
+                          textStyle: getSemiBold(
+                            fontColor: AppColors.myWhite,
+                            fontSize: 16,
+                          ),
+                          btnName: AppStrings.search,
+                          function: () {
+                            searchCubit.getWeatherCityByCityName();
+                          },
+                        ),
                   const SizedBox(
                     height: 20,
                   ),
-
-
-                  searchCubit.cityWeatherModel == null?SizedBox(): const WeatherCardWidget(
-                    countryName: "Cairo",
-                    countryWeatherCondition: "rainy",
-                    countryTemp: "10",
-                    haveSaveButton: true,
-                  ),
+                  searchCubit.cityWeatherModel == null ||
+                          searchCubit.searchButtonIsLoading
+                      ? SizedBox()
+                      : WeatherCardWidget(
+                          countryName:searchCubit.cityWeatherModel!.name.toString() ,
+                          countryWeatherCondition: searchCubit.cityWeatherModel!.weather[0].main,
+                          countryTemp: searchCubit.cityWeatherModel!.main.temp.toString(),
+                          haveSaveButton: true,
+                        ),
                 ],
               ),
             ),

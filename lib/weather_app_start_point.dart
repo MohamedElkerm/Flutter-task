@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:weather_app/modules/home/logic/home_screen_cubit.dart';
 import 'package:weather_app/modules/home/ui/home_screen.dart';
 import 'package:weather_app/resources/routes_manager.dart';
@@ -16,6 +17,7 @@ class WeatherApp extends StatelessWidget {
       create: (context) => HomeScreenCubit(),
       child: MaterialApp(
         navigatorKey: navigatorKey,
+        builder: FToastBuilder(),
         onGenerateRoute: RoutesGenerator.getRoute,
         theme: lightTheme(),
         debugShowCheckedModeBanner: false,

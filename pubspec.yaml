@@ -38,6 +38,9 @@ dependencies:
   # TO store the weather api key safely
   flutter_dotenv: ^5.2.1
 
+  #for showing toast
+  fluttertoast: ^8.2.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
