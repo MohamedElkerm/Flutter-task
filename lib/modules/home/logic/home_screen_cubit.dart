@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:meta/meta.dart';
 import 'package:weather_app/helper/local/sqlite_helper.dart';
@@ -19,6 +20,7 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
   bool getTheCachedData = false;
 
   initTheHomeScreenAndGetTheCityCachedData() async {
+    citiesList.clear();
     getTheCachedData = true;
     emit(GetTheCachedDataLoadingState());
     citiesList = await LocalDatabaseHelper.getAllCitiesWeather().then(
@@ -50,6 +52,31 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
       backgroundColor: AppColors.inf_suc_dan_warn_sucess,
     );
     emit(AddCityToTheListState());
+  }
+
+  void deleteCityFromTheListAndTheLocalDB({required String id , required BuildContext context}) {
+    emit(DeleteCityFromDBLoadingState());
+
+    // Safely remove the city from the list using `removeWhere`.
+    citiesList.removeWhere((e) => e?.id == id);
+
+    // Emit success state after modifying the list.
+    emit(DeleteCityFromDBSuccessState());
+
+    // Then delete the city from the local database.
+    LocalDatabaseHelper.deleteCityById(id).then((onValue) {
+      Fluttertoast.showToast(
+        msg: "Deleted Succefully !",
+        backgroundColor: AppColors.inf_suc_dan_warn_sucess,
+      );
+
+      initTheHomeScreenAndGetTheCityCachedData();
+      Navigator.of(context).pushNamed(Routes.homeScreen);
+      emit(DeleteCityFromDBSuccessState());
+    }).catchError((onError) {
+      print(onError.toString());
+      emit(DeleteCityFromDBErrorState());
+    });
   }
 
   void navigateFromHomeScreenToSearchScreen({required BuildContext context}) {

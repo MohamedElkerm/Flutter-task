@@ -97,4 +97,31 @@ class LocalDatabaseHelper {
       return CityWeatherModel.fromJsonFromLocalDB(maps[i]);
     });
   }
+
+
+  static Future<void> deleteCityById(String id) async {
+    final Database? db = await _database;
+
+    if (db == null) {
+      log("Database is not initialized.");
+      return;
+    }
+
+    try {
+      int count = await db.delete(
+        _tableName,
+        where: 'id = ?',
+        whereArgs: [id],
+      );
+
+      if (count > 0) {
+        log("City with ID $id deleted successfully.");
+      } else {
+        log("No city found with ID $id.");
+      }
+    } catch (err) {
+      log("Error deleting city: ${err.toString()}");
+    }
+  }
+
 }

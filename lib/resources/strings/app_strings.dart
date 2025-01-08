@@ -16,4 +16,6 @@ class AppStrings {
   static const String cityTempTitleField = "City Temp";
   static const String windSpeedTitleField = "Wind Speed";
 
+  static const String delete = "Delete";
+
 }

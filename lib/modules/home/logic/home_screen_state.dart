@@ -13,3 +13,7 @@ final class GetTheCachedDataLoadingState extends HomeScreenState {}
 final class GetTheCachedDataSuccessState extends HomeScreenState {}
 final class GetTheCachedDataErrorState extends HomeScreenState {}
 
+final class DeleteCityFromDBLoadingState extends HomeScreenState {}
+final class DeleteCityFromDBSuccessState extends HomeScreenState {}
+final class DeleteCityFromDBErrorState extends HomeScreenState {}
+
