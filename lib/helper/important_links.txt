@@ -1,0 +1,63 @@
+Using of Launch URL
+
+Webex => https://signin.webex.com/signin?surl=https%3A%2F%2Fsignin.webex.com%2Fcollabs%2Fauth%3F
+
+Outlook => https://login.microsoftonline.com/
+
+Moodle => https://moodle.org/
+
+SIS => http://sis.eelu.edu.eg/static/index.html
+
+***********************************************************************************************************
+
+Using PDFURL
+
+PDF => https://www.eelu.edu.eg/images/files/courses.pdf
+
+PDF => https://www.africau.edu/images/default/sample.pdf
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

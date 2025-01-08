@@ -1,0 +1,19 @@
+in these days I work in try to make the app work in the background
+
+Goal : To Fetch the notifications when the app is closed
+
+Def : in mobile app I have 3 status for the app
+                                                1) Foreground
+                                                2) Background
+                                                3) Terminated
+
+in first and the second status the socket IO work correctly and the notification can handle it and payload to handle the navigator of the notification "Route"
+in the terminated status cant the socket work direct, so I need to make the socket still working if the app closed
+
+Problem : try to use work_manager package and flutter_background_service to handle this case and cant to do it
+
+my next vision to solve this case to use FCM
+
+why to use it : bc it handle the notification inh the terminated directly but in using socket IO cant do it
+
+another sol : to use native code using channels or use isolate code to make the code work in the background
