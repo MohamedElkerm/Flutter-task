@@ -24,7 +24,7 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
     getTheCachedData = true;
     emit(GetTheCachedDataLoadingState());
     citiesList = await LocalDatabaseHelper.getAllCitiesWeather().then(
-      (onValue) {
+          (onValue) {
         getTheCachedData = false;
         emit(GetTheCachedDataSuccessState());
 
@@ -38,23 +38,32 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
   }
 
   saveCityToTheList(CityWeatherModel? cityWeatherModel) {
-    citiesList.add(cityWeatherModel);
-    LocalDatabaseHelper.insertCityWeather(
-      city_name: cityWeatherModel!.cityName.toString(),
-      temp: cityWeatherModel!.temp.toString(),
-      weather_condition: cityWeatherModel!.weatherCondition.toString(),
-      humidity: cityWeatherModel!.humidity.toString(),
-      wind_speed: cityWeatherModel!.WindSpeed.toString(),
-      id: cityWeatherModel!.id.toString(),
-    );
-    Fluttertoast.showToast(
-      msg: "add city successfully",
-      backgroundColor: AppColors.inf_suc_dan_warn_sucess,
-    );
-    emit(AddCityToTheListState());
+    if(isNewItem(citiesList, cityWeatherModel!.id.toString())){
+      citiesList.add(cityWeatherModel);
+      LocalDatabaseHelper.insertCityWeather(
+        city_name: cityWeatherModel!.cityName.toString(),
+        temp: cityWeatherModel!.temp.toString(),
+        weather_condition: cityWeatherModel!.weatherCondition.toString(),
+        humidity: cityWeatherModel!.humidity.toString(),
+        wind_speed: cityWeatherModel!.WindSpeed.toString(),
+        id: cityWeatherModel!.id.toString(),
+      );
+      Fluttertoast.showToast(
+        msg: "add city successfully",
+        backgroundColor: AppColors.inf_suc_dan_warn_sucess,
+      );
+      emit(AddCityToTheListState());
+    }else{
+      Fluttertoast.showToast(
+        msg: "this city is already added!",
+        backgroundColor: AppColors.inf_suc_dan_warn_warning,
+      );
+    }
+
   }
 
-  void deleteCityFromTheListAndTheLocalDB({required String id , required BuildContext context}) {
+  void deleteCityFromTheListAndTheLocalDB(
+      {required String id, required BuildContext context}) {
     emit(DeleteCityFromDBLoadingState());
 
     // Safely remove the city from the list using `removeWhere`.
@@ -96,4 +105,9 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
     );
     emit(NavigateToDetailsScreenFromHomeScreenState());
   }
+
+  bool isNewItem(List<CityWeatherModel?> list, String id) {
+    return !list.any((item) => item!.id.toString() == id);
+  }
+
 }
