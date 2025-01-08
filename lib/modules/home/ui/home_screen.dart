@@ -28,11 +28,17 @@ class HomeScreen extends StatelessWidget {
           ),
           body: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: homeCubit.citiesList.isEmpty
-                ? const NoDataOnHomeScreenWidget()
-                : DisplayTheListOfCities(
-                    citiesList: homeCubit.citiesList,
-                  ),
+            child: homeCubit.getTheCachedData
+                ? const Center(
+                    child: CircularProgressIndicator(
+                      color: AppColors.primaryColorCyan,
+                    ),
+                  )
+                : homeCubit.citiesList.isEmpty
+                    ? const NoDataOnHomeScreenWidget()
+                    : DisplayTheListOfCities(
+                        citiesList: homeCubit.citiesList,
+                      ),
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () {

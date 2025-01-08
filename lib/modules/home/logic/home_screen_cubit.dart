@@ -14,9 +14,24 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
 
   List<CityWeatherModel?> citiesList = [];
 
-  initTheHomeScreenAndGetTheCityCachedData() async {
-    citiesList = await LocalDatabaseHelper.getAllCitiesWeather();
+  bool getTheCachedData = false;
 
+  initTheHomeScreenAndGetTheCityCachedData() async {
+    getTheCachedData = true;
+    emit(GetTheCachedDataLoadingState());
+    citiesList = await LocalDatabaseHelper.getAllCitiesWeather().then(
+      (onValue) {
+        getTheCachedData = false;
+        emit(GetTheCachedDataSuccessState());
+
+        return onValue;
+      },
+    ).catchError((onError) {
+      getTheCachedData = false;
+      emit(GetTheCachedDataErrorState());
+      return onError;
+
+    });
   }
 
   void navigateFromHomeScreenToSearchScreen({required BuildContext context}) {
