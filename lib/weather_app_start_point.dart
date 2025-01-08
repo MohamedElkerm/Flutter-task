@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/modules/home/logic/home_screen_cubit.dart';
 import 'package:weather_app/modules/home/ui/home_screen.dart';
 import 'package:weather_app/resources/routes_manager.dart';
+import 'package:weather_app/resources/themes/light_theme.dart';
 
 import 'helper/global_vars.dart';
 
@@ -16,7 +17,7 @@ class WeatherApp extends StatelessWidget {
       child: MaterialApp(
         navigatorKey: navigatorKey,
         onGenerateRoute: RoutesGenerator.getRoute,
-
+        theme: lightTheme(),
         debugShowCheckedModeBanner: false,
         home: const HomeScreen(),
       ),
