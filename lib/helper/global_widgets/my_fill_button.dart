@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:weather_app/resources/media_query_values.dart';
 
 import '../../resources/colors_manager.dart';
-import 'MyResponsiveText.dart';
+import 'my_responsive_text.dart';
 
 class MyButton extends StatelessWidget {
   MyButton({

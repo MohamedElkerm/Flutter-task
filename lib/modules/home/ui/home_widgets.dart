@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/models/city_weather_model.dart';
 import 'package:weather_app/modules/home/logic/home_screen_cubit.dart';
 
-import '../../../helper/global_widgets/MyResponsiveText.dart';
+import '../../../helper/global_widgets/my_responsive_text.dart';
 import '../../../resources/colors_manager.dart';
 import '../../../resources/fonts_style.dart';
 

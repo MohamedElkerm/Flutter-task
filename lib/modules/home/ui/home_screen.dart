@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather_app/helper/global_widgets/MyResponsiveText.dart';
+import 'package:weather_app/helper/global_widgets/my_responsive_text.dart';
 import 'package:weather_app/helper/global_widgets/my_app_bar_widget.dart';
 import 'package:weather_app/modules/home/logic/home_screen_cubit.dart';
 import 'package:weather_app/modules/home/ui/home_widgets.dart';

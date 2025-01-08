@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/helper/global_widgets/MyResponsiveText.dart';
+import 'package:weather_app/helper/global_widgets/my_responsive_text.dart';
 import 'package:weather_app/resources/fonts_style.dart';
 
 import '../../resources/colors_manager.dart';

@@ -66,13 +66,10 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
       {required String id, required BuildContext context}) {
     emit(DeleteCityFromDBLoadingState());
 
-    // Safely remove the city from the list using `removeWhere`.
     citiesList.removeWhere((e) => e?.id == id);
 
-    // Emit success state after modifying the list.
     emit(DeleteCityFromDBSuccessState());
 
-    // Then delete the city from the local database.
     LocalDatabaseHelper.deleteCityById(id).then((onValue) {
       Fluttertoast.showToast(
         msg: "Deleted Succefully !",
@@ -80,7 +77,7 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
       );
 
       initTheHomeScreenAndGetTheCityCachedData();
-      Navigator.of(context).pushNamed(Routes.homeScreen);
+      Navigator.of(context).pushReplacementNamed(Routes.homeScreen);
       emit(DeleteCityFromDBSuccessState());
     }).catchError((onError) {
       print(onError.toString());
