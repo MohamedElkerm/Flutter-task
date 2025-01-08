@@ -10,11 +10,13 @@ class WeatherCardWidget extends StatelessWidget {
     required this.countryName,
     required this.countryWeatherCondition,
     required this.countryTemp,
+    this.haveSaveButton = false,
   });
 
   final String countryName;
   final String countryWeatherCondition;
   final String countryTemp;
+  final haveSaveButton;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +45,7 @@ class WeatherCardWidget extends StatelessWidget {
                 fontSize: 18,
               ),
             ),
-            Spacer(),
+            const Spacer(),
             MyResponsiveText(
               text: "$countryTemp°",
               style: getSemiBold(
@@ -51,6 +53,26 @@ class WeatherCardWidget extends StatelessWidget {
                 fontSize: 24,
               ),
             ),
+            haveSaveButton
+                ? Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: TextButton(
+                      onPressed: () {},
+                      style: ButtonStyle(
+                        backgroundColor: WidgetStateProperty.all(
+                          AppColors.myWhite,
+                        ),
+                      ),
+                      child: MyResponsiveText(
+                        text: "Save",
+                        style: getBold(
+                          fontColor: AppColors.primaryColorCyan,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                  )
+                : const SizedBox(),
           ],
         ),
       ),
