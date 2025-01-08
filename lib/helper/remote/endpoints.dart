@@ -2,7 +2,9 @@ class AppEndpoints {
 
 
 
-  static const String baseUrl = "https://eelu.edu.eg:4002/api/";
+  static const String baseUrl = "https://api.openweathermap.org";
+
+  static const String getCityWeatherByCityName = "$baseUrl/data/2.5/weather";
 
 
 
