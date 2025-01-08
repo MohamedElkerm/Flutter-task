@@ -28,10 +28,12 @@ class DioHelper {
   static Future<Response> getData({
     required String path,
     data,
+    params,
   }) async {
     return await dio.get(
       path,
       data: data,
+      queryParameters: params,
     );
   }
 }

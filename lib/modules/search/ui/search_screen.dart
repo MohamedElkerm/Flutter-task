@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_app/helper/global_widgets/my_fill_button.dart';
 import 'package:weather_app/helper/global_widgets/my_text_form_field.dart';
+import 'package:weather_app/helper/remote/dio_helper.dart';
+import 'package:weather_app/helper/remote/endpoints.dart';
 import 'package:weather_app/modules/home/ui/home_widgets.dart';
 import 'package:weather_app/modules/search/logic/search_screen_cubit.dart';
+import 'package:weather_app/resources/colors_manager.dart';
+import 'package:weather_app/resources/fonts_style.dart';
 
 import '../../../helper/global_widgets/my_app_bar_widget.dart';
 import '../../../resources/strings/app_strings.dart';
@@ -36,9 +41,24 @@ class SearchScreen extends StatelessWidget {
                     textInputType: TextInputType.text,
                   ),
                   const SizedBox(
+                    height: 8,
+                  ),
+                  MyButton(
+                    textStyle: getSemiBold(
+                      fontColor: AppColors.myWhite,
+                      fontSize: 16,
+                    ),
+                    btnName: "btnName",
+                    function: () {
+                      searchCubit.getWeatherCityByCityName();
+                    },
+                  ),
+                  const SizedBox(
                     height: 20,
                   ),
-                  const WeatherCardWidget(
+
+
+                  searchCubit.cityWeatherModel == null?SizedBox(): const WeatherCardWidget(
                     countryName: "Cairo",
                     countryWeatherCondition: "rainy",
                     countryTemp: "10",
