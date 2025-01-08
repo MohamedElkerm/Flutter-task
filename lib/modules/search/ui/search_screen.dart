@@ -71,11 +71,11 @@ class SearchScreen extends StatelessWidget {
                                 BlocProvider.of<HomeScreenCubit>(context);
                             return WeatherCardWidget(
                               countryName:
-                                  searchCubit.cityWeatherModel!.name.toString(),
+                                  searchCubit.cityWeatherModel!.cityName.toString(),
                               countryWeatherCondition:
-                                  searchCubit.cityWeatherModel!.weather[0].main,
+                                  searchCubit.cityWeatherModel!.weatherCondition,
                               countryTemp: searchCubit
-                                  .cityWeatherModel!.main.temp
+                                  .cityWeatherModel!.temp
                                   .toString(),
                               haveSaveButton: true,
                               buttonFunction: () {

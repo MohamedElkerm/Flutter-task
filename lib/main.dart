@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:weather_app/helper/local/sqlite_helper.dart';
 import 'package:weather_app/weather_app_start_point.dart';
 
 import 'helper/bloc_observer.dart';
@@ -13,6 +14,7 @@ import 'helper/remote/http_overrides_security.dart';
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
 
+
   HttpOverrides.global = MyHttpOverrides();
 
 
@@ -21,6 +23,9 @@ void main() async{
 
   /// init the dio to work
   await DioHelper.dioInit();
+
+  ///init the local DB
+  await LocalDatabaseHelper.initDatabase();
 
   /// enable the blocObserver
   Bloc.observer = MyBlocObserver();

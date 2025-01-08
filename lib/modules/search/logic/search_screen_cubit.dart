@@ -44,6 +44,7 @@ class SearchScreenCubit extends Cubit<SearchScreenState> {
         searchButtonIsLoading = false;
         emit(GetWeatherCityByNameSuccessSate());
       }).catchError((err) {
+        print(err.toString());
         Fluttertoast.showToast(
           msg: "not found the city name",
           backgroundColor: AppColors.inf_suc_dan_warn_danger,

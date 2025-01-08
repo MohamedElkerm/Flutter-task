@@ -14,7 +14,7 @@ class WeatherApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => HomeScreenCubit(),
+      create: (context) => HomeScreenCubit()..initTheHomeScreenAndGetTheCityCachedData(),
       child: MaterialApp(
         navigatorKey: navigatorKey,
         builder: FToastBuilder(),

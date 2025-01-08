@@ -109,7 +109,7 @@ class DisplayTheListOfCities extends StatelessWidget {
     required this.citiesList,
   });
 
-  final Set<CityWeatherModel?> citiesList;
+  final List<CityWeatherModel?> citiesList;
 
   @override
   Widget build(BuildContext context) {
@@ -123,9 +123,9 @@ class DisplayTheListOfCities extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: WeatherCardWidget(
-            countryName: citiesList.elementAt(index)!.name.toString(),
-            countryWeatherCondition: citiesList.elementAt(index)!.weather[0].main.toString(),
-            countryTemp: citiesList.elementAt(index)!.main.temp.toString(),
+            countryName: citiesList.elementAt(index)!.cityName.toString(),
+            countryWeatherCondition: citiesList.elementAt(index)!.weatherCondition,
+            countryTemp: citiesList.elementAt(index)!.temp,
           ),
         );
       },
