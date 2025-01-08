@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_app/modules/home/logic/home_screen_cubit.dart';
 import 'package:weather_app/modules/home/ui/home_screen.dart';
 import 'package:weather_app/resources/routes_manager.dart';
 
@@ -9,12 +11,15 @@ class WeatherApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      navigatorKey: navigatorKey,
-      onGenerateRoute: RoutesGenerator.getRoute,
+    return BlocProvider(
+      create: (context) => HomeScreenCubit(),
+      child: MaterialApp(
+        navigatorKey: navigatorKey,
+        onGenerateRoute: RoutesGenerator.getRoute,
 
-      debugShowCheckedModeBanner: false,
-      home: const HomeScreen(),
+        debugShowCheckedModeBanner: false,
+        home: const HomeScreen(),
+      ),
     );
   }
 }
