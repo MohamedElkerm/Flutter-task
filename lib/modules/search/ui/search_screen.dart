@@ -4,6 +4,7 @@ import 'package:weather_app/helper/global_widgets/my_fill_button.dart';
 import 'package:weather_app/helper/global_widgets/my_text_form_field.dart';
 import 'package:weather_app/helper/remote/dio_helper.dart';
 import 'package:weather_app/helper/remote/endpoints.dart';
+import 'package:weather_app/modules/home/logic/home_screen_cubit.dart';
 import 'package:weather_app/modules/home/ui/home_widgets.dart';
 import 'package:weather_app/modules/search/logic/search_screen_cubit.dart';
 import 'package:weather_app/resources/colors_manager.dart';
@@ -61,11 +62,29 @@ class SearchScreen extends StatelessWidget {
                   searchCubit.cityWeatherModel == null ||
                           searchCubit.searchButtonIsLoading
                       ? SizedBox()
-                      : WeatherCardWidget(
-                          countryName:searchCubit.cityWeatherModel!.name.toString() ,
-                          countryWeatherCondition: searchCubit.cityWeatherModel!.weather[0].main,
-                          countryTemp: searchCubit.cityWeatherModel!.main.temp.toString(),
-                          haveSaveButton: true,
+                      : BlocConsumer<HomeScreenCubit, HomeScreenState>(
+                          listener: (context, state) {
+                            // TODO: implement listener
+                          },
+                          builder: (context, state) {
+                            var homeCubit =
+                                BlocProvider.of<HomeScreenCubit>(context);
+                            return WeatherCardWidget(
+                              countryName:
+                                  searchCubit.cityWeatherModel!.name.toString(),
+                              countryWeatherCondition:
+                                  searchCubit.cityWeatherModel!.weather[0].main,
+                              countryTemp: searchCubit
+                                  .cityWeatherModel!.main.temp
+                                  .toString(),
+                              haveSaveButton: true,
+                              buttonFunction: () {
+                                homeCubit.saveCityToTheList(
+                                  searchCubit.cityWeatherModel,
+                                );
+                              },
+                            );
+                          },
                         ),
                 ],
               ),

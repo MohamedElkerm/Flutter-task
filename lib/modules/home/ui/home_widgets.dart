@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/models/city_weather_model.dart';
 
 import '../../../helper/global_widgets/MyResponsiveText.dart';
 import '../../../resources/colors_manager.dart';
@@ -11,12 +12,14 @@ class WeatherCardWidget extends StatelessWidget {
     required this.countryWeatherCondition,
     required this.countryTemp,
     this.haveSaveButton = false,
+    this.buttonFunction = null,
   });
 
   final String countryName;
   final String countryWeatherCondition;
   final String countryTemp;
   final haveSaveButton;
+  final buttonFunction;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +60,9 @@ class WeatherCardWidget extends StatelessWidget {
                 ? Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        buttonFunction();
+                      },
                       style: ButtonStyle(
                         backgroundColor: WidgetStateProperty.all(
                           AppColors.myWhite,
@@ -76,6 +81,54 @@ class WeatherCardWidget extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class NoDataOnHomeScreenWidget extends StatelessWidget {
+  const NoDataOnHomeScreenWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: MyResponsiveText(
+        text: "No data to display",
+        style: getBold(
+          fontColor: AppColors.primaryColorCyan,
+          fontSize: 24,
+        ),
+        maxLines: 3,
+      ),
+    );
+  }
+}
+
+class DisplayTheListOfCities extends StatelessWidget {
+  const DisplayTheListOfCities({
+    super.key,
+    required this.citiesList,
+  });
+
+  final Set<CityWeatherModel?> citiesList;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: citiesList.length,
+      shrinkWrap: true,
+      padding: EdgeInsets.zero,
+      physics: const BouncingScrollPhysics(),
+
+      itemBuilder: (context, index) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: WeatherCardWidget(
+            countryName: citiesList.elementAt(index)!.name.toString(),
+            countryWeatherCondition: citiesList.elementAt(index)!.weather[0].main.toString(),
+            countryTemp: citiesList.elementAt(index)!.main.temp.toString(),
+          ),
+        );
+      },
     );
   }
 }

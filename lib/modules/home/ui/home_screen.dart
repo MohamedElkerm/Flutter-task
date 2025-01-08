@@ -28,24 +28,11 @@ class HomeScreen extends StatelessWidget {
           ),
           body: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: GridView.builder(
-              itemCount: 20,
-              shrinkWrap: true,
-              padding: EdgeInsets.zero,
-              physics: const BouncingScrollPhysics(),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 18,
-                  childAspectRatio: 2),
-              itemBuilder: (context, index) {
-                return const WeatherCardWidget(
-                  countryName: "Cairo",
-                  countryWeatherCondition: "Rain",
-                  countryTemp: "18",
-                );
-              },
-            ),
+            child: homeCubit.citiesList.isEmpty
+                ? const NoDataOnHomeScreenWidget()
+                : DisplayTheListOfCities(
+                    citiesList: homeCubit.citiesList,
+                  ),
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
