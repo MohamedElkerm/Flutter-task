@@ -10,4 +10,10 @@ class AppStrings {
 
   static const String search = "search";
 
+  static const String cityNameTitleField = "City Name";
+  static const String weatherConditionTitleField = "Weather Condition";
+  static const String humidityTitleField = "Humidity";
+  static const String cityTempTitleField = "City Temp";
+  static const String windSpeedTitleField = "Wind Speed";
+
 }

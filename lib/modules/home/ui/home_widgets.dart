@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/models/city_weather_model.dart';
+import 'package:weather_app/modules/home/logic/home_screen_cubit.dart';
 
 import '../../../helper/global_widgets/MyResponsiveText.dart';
 import '../../../resources/colors_manager.dart';
@@ -118,14 +120,30 @@ class DisplayTheListOfCities extends StatelessWidget {
       shrinkWrap: true,
       padding: EdgeInsets.zero,
       physics: const BouncingScrollPhysics(),
-
       itemBuilder: (context, index) {
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: WeatherCardWidget(
-            countryName: citiesList.elementAt(index)!.cityName.toString(),
-            countryWeatherCondition: citiesList.elementAt(index)!.weatherCondition,
-            countryTemp: citiesList.elementAt(index)!.temp,
+          child: BlocConsumer<HomeScreenCubit, HomeScreenState>(
+            listener: (context, state) {
+              // TODO: implement listener
+            },
+            builder: (context, state) {
+              return InkWell(
+                onTap: () {
+                  BlocProvider.of<HomeScreenCubit>(context)
+                      .navigateFromHomeScreenToDetailsScreen(
+                    context: context,
+                    cityWeatherModel: citiesList.elementAt(index),
+                  );
+                },
+                child: WeatherCardWidget(
+                  countryName: citiesList.elementAt(index)!.cityName.toString(),
+                  countryWeatherCondition:
+                      citiesList.elementAt(index)!.weatherCondition,
+                  countryTemp: citiesList.elementAt(index)!.temp,
+                ),
+              );
+            },
           ),
         );
       },

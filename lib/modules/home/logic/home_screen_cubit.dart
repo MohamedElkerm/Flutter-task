@@ -14,6 +14,8 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
 
   List<CityWeatherModel?> citiesList = [];
 
+  late CityWeatherModel? currentCityWeatherModelForDetailsScreen;
+
   bool getTheCachedData = false;
 
   initTheHomeScreenAndGetTheCityCachedData() async {
@@ -30,15 +32,7 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
       getTheCachedData = false;
       emit(GetTheCachedDataErrorState());
       return onError;
-
     });
-  }
-
-  void navigateFromHomeScreenToSearchScreen({required BuildContext context}) {
-    Navigator.of(context).pushNamed(
-      Routes.searchScreen,
-    );
-    emit(NavigateToSearchScreenFromHomeScreenState());
   }
 
   saveCityToTheList(CityWeatherModel? cityWeatherModel) {
@@ -56,5 +50,23 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
       backgroundColor: AppColors.inf_suc_dan_warn_sucess,
     );
     emit(AddCityToTheListState());
+  }
+
+  void navigateFromHomeScreenToSearchScreen({required BuildContext context}) {
+    Navigator.of(context).pushNamed(
+      Routes.searchScreen,
+    );
+    emit(NavigateToSearchScreenFromHomeScreenState());
+  }
+
+  navigateFromHomeScreenToDetailsScreen({
+    required BuildContext context,
+    required CityWeatherModel? cityWeatherModel,
+  }) {
+    currentCityWeatherModelForDetailsScreen = cityWeatherModel;
+    Navigator.of(context).pushNamed(
+      Routes.detailsScreen,
+    );
+    emit(NavigateToDetailsScreenFromHomeScreenState());
   }
 }
