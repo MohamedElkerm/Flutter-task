@@ -77,7 +77,7 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
       );
 
       initTheHomeScreenAndGetTheCityCachedData();
-      Navigator.of(context).pushReplacementNamed(Routes.homeScreen);
+      Navigator.of(context).pop();
       emit(DeleteCityFromDBSuccessState());
     }).catchError((onError) {
       print(onError.toString());
